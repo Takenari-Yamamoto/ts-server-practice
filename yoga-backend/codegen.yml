@@ -1,4 +1,4 @@
-schema: "../schema/graphql/todo.graphql"
+schema: "../schema/graphql/**.graphql"
 generates:
   src/generated/types.ts:
     plugins:
@@ -6,3 +6,5 @@ generates:
   src/generated/resolvers.ts:
     plugins:
       - typescript-resolvers
+      - "typescript"
+      - "typescript-operations"
