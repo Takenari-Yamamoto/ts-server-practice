@@ -4,7 +4,7 @@ type Todo {
   completed: Boolean!
 }
 
-type Query {
+extend type Query {
   todos: [Todo!]!
   todoById(id: ID!): Todo!
 }
