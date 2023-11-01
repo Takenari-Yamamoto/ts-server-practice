@@ -1,6 +1,4 @@
-import { Todo } from "../generated/resolvers-types";
-
-const dummyTodos: Todo[] = [
+const dummyTodos = [
   { id: "1", title: "Buy groceries", completed: false },
   { id: "2", title: "Clean the house", completed: true },
 ];
