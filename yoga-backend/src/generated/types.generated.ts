@@ -18,18 +18,31 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  publishPost?: Maybe<Post>;
+};
+
+
+export type MutationpublishPostArgs = {
+  id: Scalars['ID']['input'];
+};
+
+export type Post = {
+  __typename?: 'Post';
+  author: User;
+  content?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  published: Scalars['Boolean']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  todoById?: Maybe<Todo>;
-  todos: Array<Todo>;
-  user?: Maybe<User>;
-  users?: Maybe<Array<Maybe<User>>>;
+  post?: Maybe<Post>;
+  user: User;
 };
 
 
-export type QuerytodoByIdArgs = {
+export type QuerypostArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -38,20 +51,11 @@ export type QueryuserArgs = {
   id: Scalars['ID']['input'];
 };
 
-export type Todo = {
-  __typename?: 'Todo';
-  completed: Scalars['Boolean']['output'];
-  id: Scalars['ID']['output'];
-  title: Scalars['String']['output'];
-};
-
 export type User = {
   __typename?: 'User';
-  Todos?: Maybe<Array<Maybe<Todo>>>;
-  email: Scalars['String']['output'];
+  fullName: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
-  password: Scalars['String']['output'];
+  posts: Array<Post>;
 };
 
 
@@ -126,54 +130,54 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<{}>;
-  Query: ResolverTypeWrapper<{}>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
-  Todo: ResolverTypeWrapper<Todo>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Post: ResolverTypeWrapper<Post>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Query: ResolverTypeWrapper<{}>;
   User: ResolverTypeWrapper<User>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Mutation: {};
-  Query: {};
   ID: Scalars['ID']['output'];
-  Todo: Todo;
-  Boolean: Scalars['Boolean']['output'];
+  Post: Post;
   String: Scalars['String']['output'];
+  Boolean: Scalars['Boolean']['output'];
+  Query: {};
   User: User;
 };
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {};
-
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  todoById?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType, RequireFields<QuerytodoByIdArgs, 'id'>>;
-  todos?: Resolver<Array<ResolversTypes['Todo']>, ParentType, ContextType>;
-  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryuserArgs, 'id'>>;
-  users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  publishPost?: Resolver<Maybe<ResolversTypes['Post']>, ParentType, ContextType, RequireFields<MutationpublishPostArgs, 'id'>>;
 };
 
-export type TodoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Todo'] = ResolversParentTypes['Todo']> = {
-  completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+export type PostResolvers<ContextType = any, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = {
+  author?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  published?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  post?: Resolver<Maybe<ResolversTypes['Post']>, ParentType, ContextType, RequireFields<QuerypostArgs, 'id'>>;
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryuserArgs, 'id'>>;
+};
+
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  Todos?: Resolver<Maybe<Array<Maybe<ResolversTypes['Todo']>>>, ParentType, ContextType>;
-  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  fullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  posts?: Resolver<Array<ResolversTypes['Post']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>;
+  Post?: PostResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  Todo?: TodoResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };
 
