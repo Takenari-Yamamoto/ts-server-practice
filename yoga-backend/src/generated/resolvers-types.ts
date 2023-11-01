@@ -22,7 +22,7 @@ export type Mutation = {
 
 export type Query = {
   __typename?: 'Query';
-  todoById: Todo;
+  todoById?: Maybe<Todo>;
   todos: Array<Todo>;
   user?: Maybe<User>;
   users?: Maybe<Array<Maybe<User>>>;
@@ -148,7 +148,7 @@ export type ResolversParentTypes = {
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {};
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  todoById?: Resolver<ResolversTypes['Todo'], ParentType, ContextType, RequireFields<QueryTodoByIdArgs, 'id'>>;
+  todoById?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType, RequireFields<QueryTodoByIdArgs, 'id'>>;
   todos?: Resolver<Array<ResolversTypes['Todo']>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;

@@ -6,5 +6,5 @@ type Todo {
 
 extend type Query {
   todos: [Todo!]!
-  todoById(id: ID!): Todo!
+  todoById(id: ID!): Todo
 }
