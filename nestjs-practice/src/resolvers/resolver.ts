@@ -1,19 +1,26 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
 import { Todo, IQuery, User } from 'src/generated/graphql';
+import { TodoResolver } from './todo.resolver';
+import { UserResolver } from './user.resolver';
 
 @Resolver()
 export class Resolvers implements IQuery {
+  constructor(
+    private todoReolver: TodoResolver,
+    private userResolver: UserResolver,
+  ) {}
+
   /**
    * Todo resolver
    */
   @Query()
   todoById(@Args('id') id: string): Todo | null {
-    return todosData.find((todo) => todo.id === id) || null;
+    return this.todoReolver.getTodoById(id);
   }
 
   @Query()
   todos(): Todo[] {
-    return todosData;
+    return this.todoReolver.getAllTodos();
   }
 
   /**
@@ -21,39 +28,11 @@ export class Resolvers implements IQuery {
    */
   @Query()
   users(): User[] {
-    return userData;
+    return this.userResolver.getAllUsers();
   }
 
   @Query()
   user(@Args('id') id: string): User | null {
-    return userData.find((user) => user.id === id) || null;
+    return this.userResolver.getUserById(id);
   }
 }
-
-const todosData: Todo[] = [
-  {
-    id: '1',
-    title: 'First Todo',
-    completed: false,
-  },
-  {
-    id: '2',
-    title: 'Second Todo',
-    completed: true,
-  },
-];
-
-const userData: User[] = [
-  {
-    id: '1',
-    name: 'John Doe',
-    email: 'john@example.com',
-    password: 'secret',
-  },
-  {
-    id: '2',
-    name: 'Jane Doe',
-    email: 'jane@example.com',
-    password: 'secret',
-  },
-];
