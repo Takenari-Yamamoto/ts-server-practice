@@ -11,7 +11,7 @@ import { HelloResolver } from './resolvers/hello.resolver';
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
       definitions: {
-        path: join(process.cwd(), 'src/graphql.ts'),
+        path: join(process.cwd(), 'src/generated/graphql.ts'),
         outputAs: 'class',
       },
       driver: ApolloDriver,
