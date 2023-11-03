@@ -9,7 +9,15 @@
 /* eslint-disable */
 
 export interface IQuery {
-    hello(): string | Promise<string>;
+    users(): User[] | Promise<User[]>;
+    user(id: string): Nullable<User> | Promise<Nullable<User>>;
+}
+
+export interface User {
+    id: string;
+    name: string;
+    email: string;
+    password: string;
 }
 
 type Nullable<T> = T | null;
