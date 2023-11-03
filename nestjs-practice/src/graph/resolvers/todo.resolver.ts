@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Todo } from 'src/generated/graphql';
+import { Todo } from 'src/graph/generated/graphql';
 
 @Injectable()
 export class TodoResolver {

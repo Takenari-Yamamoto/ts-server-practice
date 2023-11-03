@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from 'src/generated/graphql';
+import { User } from 'src/graph/generated/graphql';
 
 @Injectable()
 export class UserResolver {
