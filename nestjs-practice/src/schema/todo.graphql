@@ -1,0 +1,10 @@
+type Todo {
+  id: ID!
+  title: String!
+  completed: Boolean!
+}
+
+extend type Query {
+  todoById(id: ID!): Todo!
+  todos: [Todo!]!
+}
