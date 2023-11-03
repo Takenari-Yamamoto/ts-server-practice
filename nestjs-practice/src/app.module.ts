@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ApolloDriver } from '@nestjs/apollo';
+import { HelloResolver } from './resolvers/hello.resolver';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { ApolloDriver } from '@nestjs/apollo';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [HelloResolver, AppService],
 })
 export class AppModule {}

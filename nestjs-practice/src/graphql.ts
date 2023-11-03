@@ -10,6 +10,8 @@
 
 export abstract class IQuery {
     abstract hello(): string | Promise<string>;
+
+    abstract goodbye(): string | Promise<string>;
 }
 
 type Nullable<T> = T | null;
