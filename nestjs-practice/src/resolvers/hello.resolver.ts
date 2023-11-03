@@ -7,9 +7,4 @@ export class HelloResolver implements IQuery {
   hello(): string {
     return 'Hello World!!';
   }
-
-  @Query(() => String)
-  goodbye(): string {
-    return 'Goodbye World!!';
-  }
 }

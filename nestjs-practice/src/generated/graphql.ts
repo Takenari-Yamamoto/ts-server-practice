@@ -8,10 +8,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export abstract class IQuery {
-    abstract hello(): string | Promise<string>;
-
-    abstract goodbye(): string | Promise<string>;
+export interface IQuery {
+    hello(): string | Promise<string>;
 }
 
 type Nullable<T> = T | null;
