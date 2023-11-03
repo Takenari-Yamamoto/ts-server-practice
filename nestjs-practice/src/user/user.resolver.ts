@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Resolver } from '@nestjs/graphql';
 import { User } from 'src/graph/generated/graphql';
 
-@Injectable()
+@Resolver()
 export class UserResolver {
   private userData: User[] = [
     {

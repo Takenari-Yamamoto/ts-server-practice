@@ -1,7 +1,7 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
 import { Todo, IQuery, User } from 'src/graph/generated/graphql';
-import { TodoResolver } from './resolvers/todo.resolver';
-import { UserResolver } from './resolvers/user.resolver';
+import { TodoResolver } from 'src/todo/todo.resolver';
+import { UserResolver } from 'src/user/user.resolver';
 
 @Resolver()
 export class Resolvers implements IQuery {

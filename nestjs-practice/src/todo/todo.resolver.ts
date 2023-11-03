@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Resolver } from '@nestjs/graphql';
 import { Todo } from 'src/graph/generated/graphql';
 
-@Injectable()
+@Resolver()
 export class TodoResolver {
   private todosData: Todo[] = [
     {

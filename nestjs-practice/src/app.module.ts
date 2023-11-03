@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Resolvers } from './graph/resolver';
+import { UserResolver } from './user/user.resolver';
+import { TodoResolver } from './todo/todo.resolver';
 
 @Module({
   imports: [
@@ -12,7 +12,6 @@ import { Resolvers } from './graph/resolver';
       typePaths: ['./**/*.graphql'],
     }),
   ],
-  controllers: [AppController],
-  providers: [Resolvers, AppService],
+  providers: [Resolvers, UserResolver, TodoResolver],
 })
 export class AppModule {}
