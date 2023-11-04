@@ -8,3 +8,20 @@ extend type Query {
   todoById(id: ID!): Todo!
   todos: [Todo!]!
 }
+
+input CreateTodoInput {
+  title: String!
+  completed: Boolean!
+}
+
+input UpdateTodoInput {
+  id: ID!
+  title: String
+  completed: Boolean
+}
+
+extend type Mutation {
+  createTodo(input: CreateTodoInput!): Todo!
+  updateTodo(input: UpdateTodoInput!): Todo!
+  deleteTodo(id: ID!): Todo!
+}

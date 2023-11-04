@@ -1,10 +1,17 @@
-import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Todo, IQuery, User } from 'src/graph/generated/graphql';
+import { Resolver, Args, Query, Mutation } from '@nestjs/graphql';
+import {
+  Todo,
+  IQuery,
+  User,
+  IMutation,
+  CreateTodoInput,
+  UpdateTodoInput,
+} from 'src/graph/generated/graphql';
 import { TodoResolver } from 'src/todo/todo.resolver';
 import { UserResolver } from 'src/user/user.resolver';
 
 @Resolver()
-export class Resolvers implements IQuery {
+export class Resolvers implements IQuery, IMutation {
   constructor(
     private todoReolver: TodoResolver,
     private userResolver: UserResolver,
@@ -13,6 +20,11 @@ export class Resolvers implements IQuery {
   /**
    * Todo resolver
    */
+  @Mutation()
+  createTodo(input: CreateTodoInput): Todo | Promise<Todo> {
+    return this.todoReolver.createTodo(input);
+  }
+
   @Query()
   todoById(@Args('id') id: string): Todo | null {
     return this.todoReolver.getTodoById(id);
@@ -21,6 +33,16 @@ export class Resolvers implements IQuery {
   @Query()
   todos(): Todo[] {
     return this.todoReolver.getAllTodos();
+  }
+
+  @Mutation()
+  updateTodo(input: UpdateTodoInput): Todo | null {
+    return this.todoReolver.updateTodo(input);
+  }
+
+  @Mutation()
+  deleteTodo(id: string): Todo | Promise<Todo> {
+    return this.todoReolver.deleteTodoById(id);
   }
 
   /**

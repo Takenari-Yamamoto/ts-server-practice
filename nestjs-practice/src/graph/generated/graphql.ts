@@ -7,6 +7,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export interface CreateTodoInput {
+  title: string;
+  completed: boolean;
+}
+
+export interface UpdateTodoInput {
+  id: string;
+  title?: Nullable<string>;
+  completed?: Nullable<boolean>;
+}
+
 export interface Comment {
   id: string;
   text: string;
@@ -20,6 +31,12 @@ export interface IQuery {
   todos(): Todo[] | Promise<Todo[]>;
   users(): User[] | Promise<User[]>;
   user(id: string): Nullable<User> | Promise<Nullable<User>>;
+}
+
+export interface IMutation {
+  createTodo(input: CreateTodoInput): Todo | Promise<Todo>;
+  updateTodo(input: UpdateTodoInput): Todo | Promise<Todo>;
+  deleteTodo(id: string): Todo | Promise<Todo>;
 }
 
 export interface Todo {
