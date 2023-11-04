@@ -35,4 +35,21 @@ export class Resolvers implements IQuery {
   user(@Args('id') id: string): User | null {
     return this.userResolver.getUserById(id);
   }
+
+  /**
+   * Comment resolver
+   */
+  @Query()
+  comments(): any {
+    return [
+      {
+        id: '1',
+        text: 'Comment 1',
+      },
+      {
+        id: '2',
+        text: 'Comment 2',
+      },
+    ];
+  }
 }

@@ -7,7 +7,15 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export interface Comment {
+  id: string;
+  text: string;
+}
+
 export interface IQuery {
+  comments():
+    | Nullable<Nullable<Comment>[]>
+    | Promise<Nullable<Nullable<Comment>[]>>;
   todoById(id: string): Todo | Promise<Todo>;
   todos(): Todo[] | Promise<Todo[]>;
   users(): User[] | Promise<User[]>;

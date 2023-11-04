@@ -1,0 +1,8 @@
+type Comment {
+  id: ID!
+  text: String!
+}
+
+type Query {
+  comments: [Comment]
+}
