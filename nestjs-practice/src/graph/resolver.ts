@@ -7,8 +7,8 @@ import {
   CreateTodoInput,
   UpdateTodoInput,
 } from 'src/graph/generated/graphql';
-import { TodoResolver } from 'src/todo/todo.resolver';
-import { UserResolver } from 'src/user/user.resolver';
+import { TodoResolver } from 'src/modules/todo/todo.resolver';
+import { UserResolver } from 'src/modules/user/user.resolver';
 
 @Resolver()
 export class Resolvers implements IQuery, IMutation {
