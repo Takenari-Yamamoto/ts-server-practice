@@ -1,17 +1,26 @@
-version: "3.8"
-
+version: "3.9"
 services:
-  postgres:
-    image: postgres:latest
-    container_name: prisma-db
-    environment:
-      POSTGRES_USER: johndoe
-      POSTGRES_PASSWORD: randompassword
-      POSTGRES_DB: mydb
+  # app:
+  #   build: .
+  #   ports:
+  #     - '3000:3000'
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - DATABASE_HOST=db
+  #     - DATABASE_USER=root
+  #     - DATABASE_PASSWORD=password
+  #     - DATABASE_NAME=synergeee_dev
+  db:
+    image: mysql:8.0
     ports:
-      - "5432:5432"
+      - "3306:3306"
+    environment:
+      MYSQL_USER: user
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: synergeee_dev
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - db-data:/var/lib/mysql
 
 volumes:
-  postgres-data:
+  db-data:
