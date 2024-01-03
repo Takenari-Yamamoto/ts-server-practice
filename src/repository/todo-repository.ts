@@ -1,50 +1,60 @@
+import { eq } from "drizzle-orm";
+import { dbClient } from "../database/connection";
+import { todos } from "../database/schema/todos";
 import { Todo } from "../domain/todo";
+import { v4 as uuidv4 } from "uuid";
 
 export interface TodoRepositoryIF {
-  findAll: () => Todo[];
-  findById: (id: number) => Todo | undefined;
-  create: (title: string, description: string) => Todo;
-  update: (id: number, title: string, description: string) => Todo | undefined;
-  delete: (id: number) => Todo | undefined;
+  findAll: () => Promise<Todo[]>;
+  findById: (id: string) => Promise<Todo | undefined>;
+  create: (title: string, description: string) => Promise<Todo>;
+  update: (
+    id: string,
+    title: string,
+    description: string
+  ) => Promise<Todo | undefined>;
+  delete: (id: string) => Promise<string>;
 }
-
-const TodoStore: Todo[] = [];
 
 // Todoのリポジトリ層
 export const TodoRepository: TodoRepositoryIF = {
-  findAll: () => {
-    return TodoStore;
+  findAll: async () => {
+    return await dbClient.select().from(todos);
   },
 
-  findById: (id: number) => {
-    return TodoStore.find((todo) => todo.id === id);
+  findById: async (id: string) => {
+    const res = await dbClient.select().from(todos).where(eq(todos.id, id));
+
+    return res[0];
   },
 
-  create: (title: string, description: string) => {
-    const newTodo: Todo = {
-      id: Math.max(...TodoStore.map((t) => t.id), 0) + 1, // 簡易ID生成
-      title,
-      description,
-      done: false,
-    };
-    TodoStore.push(newTodo);
-    return newTodo;
+  create: async (title: string, description: string) => {
+    const id = uuidv4();
+    const res = await dbClient
+      .insert(todos)
+      .values({ id, title, description, done: false })
+      .execute();
+
+    const created = await TodoRepository.findById(id);
+    if (!created) {
+      throw new Error("failed to create todo");
+    }
+
+    return created;
   },
 
-  update: (id: number, title: string, description: string) => {
-    const todoIndex = TodoStore.findIndex((todo) => todo.id === id);
-    if (todoIndex === -1) return undefined;
+  update: async (id: string, title: string, description: string) => {
+    const res = await dbClient
+      .update(todos)
+      .set({ title, description })
+      .where(eq(todos.id, id));
 
-    const updatedTodo = { ...TodoStore[todoIndex], title, description };
-    TodoStore[todoIndex] = updatedTodo;
-    return updatedTodo;
+    return await TodoRepository.findById(id);
   },
 
-  delete: (id: number) => {
-    const todoIndex = TodoStore.findIndex((todo) => todo.id === id);
-    if (todoIndex === -1) return undefined;
+  delete: async (id: string) => {
+    await dbClient.delete(todos).where(eq(todos.id, id));
 
-    const [deletedTodo] = TodoStore.splice(todoIndex, 1);
-    return deletedTodo;
+    return id;
   },
 };
