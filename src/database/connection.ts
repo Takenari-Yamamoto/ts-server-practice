@@ -10,5 +10,5 @@ export const options = {
 };
 
 export const connection = mysql.createPool(options);
-
 export const dbClient = drizzle(connection);
+export type DbClient = typeof dbClient;
