@@ -1,0 +1,1 @@
+ALTER TABLE `todos` MODIFY COLUMN `description` char(255) NOT NULL;

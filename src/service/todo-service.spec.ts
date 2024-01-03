@@ -46,11 +46,12 @@ describe(TodoService, () => {
 
   it("should find a todo item by id", () => {
     const service = TodoService(mockRepository);
-    const todo = { id: 1, title: "Todo 1", description: "Description 1" };
+    const id = "xxx";
+    const todo = { id, title: "Todo 1", description: "Description 1" };
 
     mockRepository.findById = jest.fn().mockReturnValue(todo);
 
-    const result = service.findTodoById(1);
+    const result = service.findTodoById(id);
 
     expect(mockRepository.findById).toHaveBeenCalledWith(1);
     expect(result).toEqual(todo);
@@ -59,17 +60,21 @@ describe(TodoService, () => {
   it("should update a todo item", () => {
     const service = TodoService(mockRepository);
     const updatedTodo = {
-      id: 1,
+      id: "1",
       title: "Updated Todo",
       description: "Updated Description",
     };
 
     mockRepository.update = jest.fn().mockReturnValue(updatedTodo);
 
-    const result = service.updateTodo(1, "Updated Todo", "Updated Description");
+    const result = service.updateTodo(
+      "1",
+      "Updated Todo",
+      "Updated Description"
+    );
 
     expect(mockRepository.update).toHaveBeenCalledWith(
-      1,
+      "1",
       "Updated Todo",
       "Updated Description"
     );
@@ -79,14 +84,14 @@ describe(TodoService, () => {
   it("should delete a todo item", () => {
     const service = TodoService(mockRepository);
     const todoToDelete = {
-      id: 1,
+      id: "1",
       title: "Todo 1",
       description: "Description 1",
     };
 
     mockRepository.delete = jest.fn().mockReturnValue(todoToDelete);
 
-    const result = service.deleteTodo(1);
+    const result = service.deleteTodo("1");
 
     expect(mockRepository.delete).toHaveBeenCalledWith(1);
     expect(result).toEqual(todoToDelete);

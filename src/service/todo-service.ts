@@ -1,28 +1,23 @@
-import { Todo } from "../domain/todo";
 import { TodoRepositoryIF } from "../repository/todo-repository";
 
 export const TodoService = (todoRepository: TodoRepositoryIF) => {
-  const findAllTodos = (): Todo[] => {
+  const findAllTodos = () => {
     return todoRepository.findAll();
   };
 
-  const findTodoById = (id: number): Todo | undefined => {
+  const findTodoById = (id: string) => {
     return todoRepository.findById(id);
   };
 
-  const createTodo = (title: string, description: string): Todo => {
+  const createTodo = (title: string, description: string) => {
     return todoRepository.create(title, description);
   };
 
-  const updateTodo = (
-    id: number,
-    title: string,
-    description: string
-  ): Todo | undefined => {
+  const updateTodo = (id: string, title: string, description: string) => {
     return todoRepository.update(id, title, description);
   };
 
-  const deleteTodo = (id: number): Todo | undefined => {
+  const deleteTodo = (id: string) => {
     return todoRepository.delete(id);
   };
 

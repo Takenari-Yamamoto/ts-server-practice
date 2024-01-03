@@ -30,7 +30,7 @@ export const TodoRepository: TodoRepositoryIF = {
 
   create: async (title: string, description: string) => {
     const id = uuidv4();
-    const res = await dbClient
+    await dbClient
       .insert(todos)
       .values({ id, title, description, done: false })
       .execute();
