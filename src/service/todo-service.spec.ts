@@ -53,7 +53,7 @@ describe(TodoService, () => {
 
     const result = service.findTodoById(id);
 
-    expect(mockRepository.findById).toHaveBeenCalledWith(1);
+    expect(mockRepository.findById).toHaveBeenCalledWith("xxx");
     expect(result).toEqual(todo);
   });
 
@@ -93,7 +93,7 @@ describe(TodoService, () => {
 
     const result = service.deleteTodo("1");
 
-    expect(mockRepository.delete).toHaveBeenCalledWith(1);
+    expect(mockRepository.delete).toHaveBeenCalledWith("1");
     expect(result).toEqual(todoToDelete);
   });
 });
