@@ -1,16 +1,5 @@
 version: "3.9"
 services:
-  # app:
-  #   build: .
-  #   ports:
-  #     - '3000:3000'
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - DATABASE_HOST=db
-  #     - DATABASE_USER=root
-  #     - DATABASE_PASSWORD=password
-  #     - DATABASE_NAME=synergeee_dev
   db:
     image: mysql:8.0
     ports:
@@ -18,7 +7,7 @@ services:
     environment:
       MYSQL_USER: user
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: synergeee_dev
+      MYSQL_DATABASE: database
     volumes:
       - db-data:/var/lib/mysql
 
