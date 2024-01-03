@@ -1,4 +1,5 @@
 import {
+  connection,
   createTestDb,
   deleteTestDb,
   migrateTestDb,

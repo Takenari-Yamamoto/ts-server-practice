@@ -14,7 +14,7 @@ const opt = {
   port: 3308,
 };
 
-const connection = mysql.createPool(opt);
+export const connection = mysql.createPool(opt);
 
 /**
  * DB client for test code
@@ -25,12 +25,14 @@ export const testDbClient = drizzle(connection);
  * create DB for test code
  */
 export const createTestDb = async () => {
+  const { database, ...rest } = opt;
+  const tempConnection = mysql.createPool(rest);
   try {
-    const { database, ...rest } = opt;
-    const connection = mysql.createPool(rest);
-    await connection.query(`CREATE DATABASE IF NOT EXISTS ${opt.database}`);
+    await tempConnection.query(`CREATE DATABASE IF NOT EXISTS ${opt.database}`);
   } catch (e) {
     console.error("failed to create database", e);
+  } finally {
+    await tempConnection.end();
   }
 };
 
@@ -42,6 +44,8 @@ export const deleteTestDb = async () => {
     await connection.query(`DROP DATABASE IF EXISTS ${opt.database}`);
   } catch (e) {
     console.error("failed to delete database", e);
+  } finally {
+    await connection.end();
   }
 };
 

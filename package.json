@@ -4,7 +4,7 @@
   "description": "n",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "generate:db-schema": "npx drizzle-kit generate:mysql",
     "migrate:db": "cd src/database/utils && ts-node migrate.ts",
     "create:db": "cd src/database/utils && ts-node create-db.ts",
