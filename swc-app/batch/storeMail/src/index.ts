@@ -1,4 +1,4 @@
-import { connectMail } from "../../../src/utils/connectMail";
+import { connectMail } from "@utils/connectMail";
 
 const main = async () => {
   const res = await connectMail("hoge@hoge.com", "xxxxxxxx");
