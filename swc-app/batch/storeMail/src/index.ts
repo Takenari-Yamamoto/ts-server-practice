@@ -1,4 +1,4 @@
-import { connectMail } from "@utils/connectMail";
+import { connectMail } from "@/utils/connectMail";
 
 const main = async () => {
   console.log("Starting main function");
